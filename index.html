@@ -8,12 +8,13 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #172a35;
-      --muted: #526773;
-      --paper: #fffdf8;
-      --blue: #176b87;
-      --coral: #e77a5b;
-      --lime: #d7ed9b;
+      --ink: #302748;
+      --muted: #5b536d;
+      --glass: rgba(255, 255, 255, 0.74);
+      --lavender: #eee7ff;
+      --violet: #7257ae;
+      --coral: #bb5c70;
+      --mint: #d7f0e5;
     }
 
     * {
@@ -21,6 +22,7 @@
     }
 
     body {
+      position: relative;
       min-height: 100vh;
       margin: 0;
       display: grid;
@@ -28,25 +30,95 @@
       padding: 40px 20px;
       color: var(--ink);
       background:
-        radial-gradient(ellipse at 12% 12%, rgba(215, 237, 155, 0.65), transparent 34%),
-        radial-gradient(ellipse at 90% 85%, rgba(231, 122, 91, 0.2), transparent 32%),
-        #eaf3f1;
+        radial-gradient(ellipse at 12% 10%, rgba(255, 255, 255, 0.95), transparent 30%),
+        radial-gradient(ellipse at 88% 82%, rgba(215, 240, 229, 0.9), transparent 34%),
+        linear-gradient(145deg, #e8ddff, #d9ccf5 55%, #e8e1fa);
       font-family: "Trebuchet MS", Arial, sans-serif;
       line-height: 1.6;
     }
 
+    .cat-sky {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .cat {
+      position: absolute;
+      display: block;
+      color: #695494;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      filter: drop-shadow(0 5px 8px rgba(75, 53, 117, 0.16));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .cat-one {
+      top: 12%;
+      left: 8%;
+    }
+
+    .cat-two {
+      top: 18%;
+      right: 9%;
+      color: #a64e69;
+      animation-delay: -2s;
+    }
+
+    .cat-three {
+      right: 7%;
+      bottom: 13%;
+      color: #4d806e;
+      animation-delay: -4s;
+    }
+
+    .cat-four {
+      bottom: 10%;
+      left: 10%;
+      color: #8a6c38;
+      animation-delay: -1s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(-8deg);
+      }
+
+      50% {
+        transform: translate3d(8px, -15px, 0) rotate(8deg);
+      }
+    }
+
     main {
+      position: relative;
+      z-index: 1;
       width: min(100%, 920px);
       overflow: hidden;
-      border: 1px solid rgba(23, 42, 53, 0.1);
-      border-radius: 12px;
-      background: var(--paper);
-      box-shadow: 0 24px 70px rgba(23, 42, 53, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: 24px;
+      background: var(--glass);
+      box-shadow: 0 24px 70px rgba(68, 49, 111, 0.16), inset 0 1px rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: blur(24px) saturate(135%);
+      backdrop-filter: blur(24px) saturate(135%);
+      animation: arrive 700ms ease-out both;
+    }
+
+    @keyframes arrive {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .top-line {
-      height: 9px;
-      background: linear-gradient(90deg, var(--blue) 0 58%, var(--coral) 58% 82%, var(--lime) 82%);
+      height: 7px;
+      background: linear-gradient(90deg, var(--violet) 0 56%, var(--coral) 56% 78%, #73a891 78%);
     }
 
     .profile {
@@ -59,7 +131,7 @@
 
     .eyebrow {
       margin: 0 0 14px;
-      color: var(--blue);
+      color: var(--violet);
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -107,18 +179,23 @@
 
     li {
       padding: 6px 11px;
-      border: 1px solid #dce7df;
+      border: 1px solid rgba(114, 87, 174, 0.2);
       border-radius: 999px;
       color: var(--ink);
-      background: #f3f7ef;
+      background: rgba(255, 255, 255, 0.55);
       font-size: 0.88rem;
     }
 
     figure {
       position: relative;
       margin: 0;
-      padding: 14px 14px 34px;
-      background: #f2e7d8;
+      padding: 12px 12px 30px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.48);
+      box-shadow: 0 12px 32px rgba(68, 49, 111, 0.12), inset 0 1px rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
       transform: rotate(2deg);
     }
 
@@ -128,7 +205,9 @@
       left: 50%;
       width: 76px;
       height: 22px;
-      background: rgba(215, 237, 155, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 6px;
+      background: rgba(215, 240, 229, 0.78);
       content: "";
       transform: translateX(-50%) rotate(-3deg);
     }
@@ -136,9 +215,11 @@
     img {
       display: block;
       width: 100%;
+      overflow: hidden;
       aspect-ratio: 4 / 5;
+      border-radius: 11px;
       object-fit: cover;
-      background: #dce7df;
+      background: var(--lavender);
     }
 
     figcaption {
@@ -175,9 +256,25 @@
         padding: 0 26px 24px;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="cat-sky" aria-hidden="true">
+    <span class="cat cat-one">🐈</span>
+    <span class="cat cat-two">😺</span>
+    <span class="cat cat-three">🐈‍⬛</span>
+    <span class="cat cat-four">🐱</span>
+  </div>
   <main>
     <div class="top-line" aria-hidden="true"></div>
     <section class="profile" aria-labelledby="name">
