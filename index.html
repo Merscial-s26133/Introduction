@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100d18">
+  <meta name="theme-color" content="#020617">
   <meta name="description" content="Merscial RAYMOND — IoT Engineer, KC student, and curious maker from Benin.">
   <title>Merscial RAYMOND | Neon Profile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,17 +12,17 @@
   <style>
     :root {
       color-scheme: dark;
-      --night: #100d18;
-      --ink: #f7f3ff;
-      --muted: #b7aecb;
-      --soft: #d9d1e8;
-      --glass: rgba(34, 26, 51, 0.62);
-      --glass-bright: rgba(61, 43, 82, 0.58);
-      --line: rgba(239, 229, 255, 0.17);
-      --cyan: #66f4df;
-      --pink: #ff65bd;
-      --acid: #d5ff65;
-      --violet: #a98aff;
+      --night: #020617;
+      --ink: #f8fafc;
+      --muted: #94a3b8;
+      --soft: #cbd5e1;
+      --glass: rgba(15, 23, 42, 0.76);
+      --glass-bright: rgba(30, 41, 59, 0.72);
+      --line: rgba(148, 163, 184, 0.2);
+      --cyan: #22d3ee;
+      --pink: #f472b6;
+      --acid: #a3e635;
+      --violet: #a78bfa;
       --mono: "DM Mono", "Courier New", monospace;
       --sans: "Space Grotesk", "Trebuchet MS", sans-serif;
     }
@@ -43,9 +43,9 @@
       overflow-x: hidden;
       color: var(--ink);
       background:
-        radial-gradient(ellipse at 13% 14%, rgba(169, 138, 255, 0.2), transparent 34%),
-        radial-gradient(ellipse at 83% 30%, rgba(255, 101, 189, 0.12), transparent 30%),
-        radial-gradient(ellipse at 72% 88%, rgba(102, 244, 223, 0.1), transparent 34%),
+        radial-gradient(ellipse at 13% 14%, rgba(34, 211, 238, 0.13), transparent 34%),
+        radial-gradient(ellipse at 83% 30%, rgba(244, 114, 182, 0.1), transparent 30%),
+        radial-gradient(ellipse at 72% 88%, rgba(59, 130, 246, 0.11), transparent 34%),
         var(--night);
       font-family: var(--sans);
       line-height: 1.6;
@@ -56,8 +56,8 @@
       z-index: -1;
       inset: 0;
       background-image:
-        linear-gradient(rgba(226, 213, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(226, 213, 255, 0.035) 1px, transparent 1px);
+        linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
       background-size: 48px 48px;
       content: "";
       mask-image: linear-gradient(to bottom, black, transparent 85%);
@@ -79,7 +79,7 @@
       outline-offset: 5px;
     }
 
-    .cat-cloud {
+    .anime-backdrop {
       position: fixed;
       z-index: 0;
       inset: 0;
@@ -87,59 +87,118 @@
       pointer-events: none;
     }
 
-    .cat {
+    .anime-backdrop::before {
       position: absolute;
+      z-index: 0;
+      inset: -18%;
+      background:
+        radial-gradient(ellipse at 18% 28%, rgba(34, 211, 238, 0.17), transparent 34%),
+        radial-gradient(ellipse at 78% 39%, rgba(244, 114, 182, 0.14), transparent 32%),
+        radial-gradient(ellipse at 55% 83%, rgba(124, 58, 237, 0.15), transparent 38%);
+      content: "";
+      animation: ambient-drift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambient-drift {
+      from {
+        transform: translate3d(-2%, -1%, 0) scale(1);
+      }
+
+      to {
+        transform: translate3d(2%, 1%, 0) scale(1.08);
+      }
+    }
+
+    .cursor-glow {
+      position: absolute;
+      z-index: 3;
+      top: var(--cursor-y, 50%);
+      left: var(--cursor-x, 50%);
+      width: clamp(280px, 38vw, 560px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.2), rgba(244, 114, 182, 0.08) 38%, transparent 72%);
+      filter: blur(24px);
+      opacity: var(--cursor-opacity, 0.72);
+      transform: translate(-50%, -50%);
+      transition: opacity 350ms ease;
+      will-change: top, left;
+    }
+
+    .particle-field {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .anime-shot {
+      position: absolute;
+      z-index: 1;
       display: block;
-      font-size: 2rem;
-      filter: drop-shadow(0 0 16px rgba(102, 244, 223, 0.4));
-      animation: cat-drift 7s ease-in-out infinite;
+      object-fit: cover;
+      filter: saturate(1.35) contrast(1.08);
+      mix-blend-mode: screen;
+      transition: transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+      will-change: transform;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 22%, rgba(0, 0, 0, 0.72) 52%, transparent 78%);
+      mask-image: radial-gradient(ellipse at center, #000 22%, rgba(0, 0, 0, 0.72) 52%, transparent 78%);
     }
 
-    .cat-one {
-      top: 21%;
-      left: 3%;
-      color: var(--cyan);
+    .anime-shot-poster {
+      top: -9vh;
+      left: -12vw;
+      width: 55vw;
+      height: 88vh;
+      opacity: 0.24;
+      object-position: center 24%;
+      transform: translate3d(var(--move-x, 0px), var(--move-y, 0px), 0) rotate(-5deg);
     }
 
-    .cat-two {
-      top: 70%;
-      right: 3%;
-      color: var(--pink);
-      animation-delay: -2.5s;
+    .anime-shot-wide {
+      right: -9vw;
+      bottom: -16vh;
+      width: 68vw;
+      height: 77vh;
+      opacity: 0.24;
+      object-position: center;
+      transform: translate3d(var(--move-x, 0px), var(--move-y, 0px), 0) rotate(3deg);
     }
 
-    .cat-three {
-      top: 8%;
-      right: 15%;
-      font-size: 1.5rem;
-      animation-delay: -4s;
-    }
-
-    @keyframes cat-drift {
-      0%, 100% {
-        transform: translate3d(0, 0, 0) rotate(-9deg);
-      }
-
-      50% {
-        transform: translate3d(12px, -20px, 0) rotate(9deg);
-      }
+    .anime-shot-scene {
+      top: 2vh;
+      right: 4vw;
+      width: 37vw;
+      height: 40vh;
+      opacity: 0.2;
+      object-position: center 36%;
+      transform: translate3d(var(--move-x, 0px), var(--move-y, 0px), 0) rotate(2deg);
     }
 
     .site-shell {
       position: relative;
       z-index: 1;
-      width: min(100%, 1240px);
+      width: min(100%, 1200px);
       margin-inline: auto;
-      padding: 0 56px;
+      padding: 0 24px;
     }
 
     .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
       min-height: 86px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(2, 6, 23, 0.88);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
     }
 
     .brand {
@@ -232,12 +291,19 @@
     }
 
     .hero {
-      min-height: 650px;
+      min-height: 610px;
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.78fr);
       align-items: center;
       gap: 76px;
-      padding: 72px 0 76px;
+      margin-top: 40px;
+      padding: clamp(30px, 5vw, 58px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.76);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35), inset 0 1px rgba(255, 255, 255, 0.06);
+      -webkit-backdrop-filter: blur(20px) saturate(125%);
+      backdrop-filter: blur(20px) saturate(125%);
     }
 
     .hero-copy {
@@ -277,7 +343,7 @@
     h1 span {
       display: block;
       color: transparent;
-      background: linear-gradient(100deg, var(--ink) 8%, #d7c6ff 49%, var(--pink) 100%);
+      background: linear-gradient(100deg, var(--ink) 8%, #a5f3fc 55%, var(--cyan) 100%);
       background-clip: text;
       -webkit-background-clip: text;
     }
@@ -528,29 +594,15 @@
       font-size: 0.65rem;
     }
 
-    .cat-orbit {
-      position: absolute;
-      z-index: 3;
-      top: 34%;
-      right: -31px;
-      width: 56px;
-      height: 56px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(102, 244, 223, 0.6);
-      border-radius: 18px;
-      background: rgba(27, 21, 41, 0.68);
-      box-shadow: 0 0 24px rgba(102, 244, 223, 0.18), inset 0 1px rgba(255, 255, 255, 0.2);
+    .interests-section {
+      margin-top: 24px;
+      padding: 25px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.78);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
       -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
-      font-size: 1.6rem;
-      animation: cat-drift 5s ease-in-out infinite;
-    }
-
-    .interests-section {
-      padding: 27px 0 39px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
     }
 
     .interests-heading {
@@ -671,14 +723,14 @@
 
     @media (max-width: 900px) {
       .site-shell {
-        padding-inline: 34px;
+        padding-inline: 24px;
       }
 
       .hero {
-        min-height: 590px;
+        min-height: 0;
         grid-template-columns: minmax(0, 1fr) minmax(270px, 0.82fr);
         gap: 38px;
-        padding-block: 62px;
+        padding: 38px;
       }
 
       h1 {
@@ -720,7 +772,8 @@
         min-height: auto;
         grid-template-columns: 1fr;
         gap: 52px;
-        padding-block: 62px 58px;
+        margin-top: 24px;
+        padding: 30px 24px;
       }
 
       h1 {
@@ -732,16 +785,44 @@
         justify-self: center;
       }
 
-      .cat-one {
-        left: 1%;
+      .anime-shot-poster {
+        top: 1vh;
+        left: -27vw;
+        width: 86vw;
+        height: 55vh;
       }
 
-      .cat-two {
-        right: 1%;
+      .anime-shot-wide {
+        right: -30vw;
+        bottom: -2vh;
+        width: 100vw;
+        height: 52vh;
+      }
+
+      .anime-shot-scene {
+        top: 18vh;
+        right: -14vw;
+        width: 70vw;
+        height: 32vh;
       }
 
       .interest-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .interests-section {
+        padding: 21px;
+      }
+
+      .site-footer {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 18px 4px;
+      }
+
+      .cursor-glow {
+        width: 78vw;
+        opacity: 0.34;
       }
     }
 
@@ -804,14 +885,24 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
+
+      .anime-backdrop::before {
+        animation: none;
+      }
+
+      .cursor-glow {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="cat-cloud" aria-hidden="true">
-    <span class="cat cat-one">😺</span>
-    <span class="cat cat-two">🐈‍⬛</span>
-    <span class="cat cat-three">🐈</span>
+  <div class="anime-backdrop" aria-hidden="true">
+    <img class="anime-shot anime-shot-poster" src="images/images%20(1).jpg" alt="">
+    <img class="anime-shot anime-shot-wide" src="images/images.jpg" alt="">
+    <img class="anime-shot anime-shot-scene" src="images/cyberpunk-edgerunners-mission-kit-box-art-header.webp" alt="">
+    <canvas class="particle-field" id="particle-field" aria-hidden="true"></canvas>
+    <div class="cursor-glow"></div>
   </div>
 
   <div class="site-shell">
@@ -857,7 +948,6 @@
         </div>
 
         <div class="portrait-stage">
-          <span class="cat-orbit" aria-hidden="true">😸</span>
           <div class="portrait-meta"><span>Profile image</span><span>Benin / ICT4D</span></div>
           <div class="portrait-image">
             <img src="images/WhatsApp%20Image%202026-10-29%20at%2020.07.58.jpeg" alt="Portrait of Merscial RAYMOND">
@@ -889,19 +979,170 @@
 
     <footer class="site-footer">
       <span>Thanks for visiting my corner of the internet.</span>
-      <span>END OF TRANSMISSION _</span>
+      <span>&copy; 2026 Merscial RAYMOND</span>
+      <span>Cyberpunk: Edgerunners artwork belongs to its respective rights holders.</span>
     </footer>
   </div>
 
   <script>
     const glowToggle = document.querySelector("#glow-toggle");
     const toggleLabel = document.querySelector("#toggle-label");
+    const animeBackdrop = document.querySelector(".anime-backdrop");
+    const animeLayers = document.querySelectorAll(".anime-shot");
+    const particleCanvas = document.querySelector("#particle-field");
+    const particleContext = particleCanvas.getContext("2d");
+    const canTrackPointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const particles = [];
+    let pointerClientX = -1;
+    let pointerClientY = -1;
+    let particleFrame = 0;
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+
+    function drawParticles() {
+      particleContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      particles.forEach((particle, index) => {
+        if (!prefersReducedMotion.matches) {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+
+          if (particle.x < 0 || particle.x > canvasWidth) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > canvasHeight) particle.vy *= -1;
+        }
+
+        particleContext.beginPath();
+        particleContext.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        particleContext.fillStyle = "rgba(186, 230, 253, 0.62)";
+        particleContext.fill();
+
+        for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
+          const nextParticle = particles[nextIndex];
+          const distance = Math.hypot(particle.x - nextParticle.x, particle.y - nextParticle.y);
+
+          if (distance < 118) {
+            const opacity = (1 - distance / 118) * 0.2;
+            particleContext.beginPath();
+            particleContext.moveTo(particle.x, particle.y);
+            particleContext.lineTo(nextParticle.x, nextParticle.y);
+            particleContext.strokeStyle = `rgba(103, 232, 249, ${opacity})`;
+            particleContext.lineWidth = 0.7;
+            particleContext.stroke();
+          }
+        }
+
+        if (canTrackPointer.matches && pointerClientX >= 0) {
+          const pointerDistance = Math.hypot(particle.x - pointerClientX, particle.y - pointerClientY);
+
+          if (pointerDistance < 170) {
+            const opacity = (1 - pointerDistance / 170) * 0.48;
+            particleContext.beginPath();
+            particleContext.moveTo(particle.x, particle.y);
+            particleContext.lineTo(pointerClientX, pointerClientY);
+            particleContext.strokeStyle = `rgba(244, 114, 182, ${opacity})`;
+            particleContext.lineWidth = 1;
+            particleContext.stroke();
+          }
+        }
+      });
+
+      if (!prefersReducedMotion.matches) {
+        particleFrame = window.requestAnimationFrame(drawParticles);
+      } else {
+        particleFrame = 0;
+      }
+    }
+
+    function resizeParticleCanvas() {
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+      particleCanvas.width = canvasWidth * pixelRatio;
+      particleCanvas.height = canvasHeight * pixelRatio;
+      particleContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const particleCount = Math.min(110, Math.max(30, Math.round((canvasWidth * canvasHeight) / 15000)));
+      particles.length = 0;
+
+      for (let index = 0; index < particleCount; index += 1) {
+        particles.push({
+          x: Math.random() * canvasWidth,
+          y: Math.random() * canvasHeight,
+          vx: (Math.random() - 0.5) * 0.42,
+          vy: (Math.random() - 0.5) * 0.42,
+          size: Math.random() * 1.4 + 0.7,
+        });
+      }
+
+      if (particleFrame) {
+        window.cancelAnimationFrame(particleFrame);
+      }
+
+      drawParticles();
+    }
+
+    resizeParticleCanvas();
+    window.addEventListener("resize", resizeParticleCanvas, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && particleFrame) {
+        window.cancelAnimationFrame(particleFrame);
+        particleFrame = 0;
+      } else if (!document.hidden && !particleFrame && !prefersReducedMotion.matches) {
+        drawParticles();
+      }
+    });
 
     glowToggle.addEventListener("click", () => {
       const isBoosted = document.body.classList.toggle("signal-boost");
       glowToggle.setAttribute("aria-pressed", String(isBoosted));
       toggleLabel.textContent = isBoosted ? "Neon boost on" : "Neon boost";
     });
+
+    if (canTrackPointer.matches && !prefersReducedMotion.matches) {
+      let pointerX = 0;
+      let pointerY = 0;
+      let pointerFrame = 0;
+
+      window.addEventListener("pointermove", (event) => {
+        pointerClientX = event.clientX;
+        pointerClientY = event.clientY;
+        pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
+        pointerY = (event.clientY / window.innerHeight - 0.5) * 2;
+
+        if (pointerFrame) {
+          return;
+        }
+
+        pointerFrame = window.requestAnimationFrame(() => {
+          animeBackdrop.style.setProperty("--cursor-x", `${(pointerX + 1) * 50}vw`);
+          animeBackdrop.style.setProperty("--cursor-y", `${(pointerY + 1) * 50}vh`);
+
+          animeLayers.forEach((layer, index) => {
+            const depth = [14, 22, 10][index] || 12;
+            layer.style.setProperty("--move-x", `${pointerX * -depth}px`);
+            layer.style.setProperty("--move-y", `${pointerY * -depth * 0.65}px`);
+          });
+
+          pointerFrame = 0;
+        });
+      }, { passive: true });
+
+      window.addEventListener("pointerleave", () => {
+        pointerClientX = -1;
+        pointerClientY = -1;
+        animeBackdrop.style.setProperty("--cursor-opacity", "0");
+        animeLayers.forEach((layer) => {
+          layer.style.setProperty("--move-x", "0px");
+          layer.style.setProperty("--move-y", "0px");
+        });
+      });
+
+      window.addEventListener("pointerenter", () => {
+        animeBackdrop.style.setProperty("--cursor-opacity", "0.72");
+      });
+    }
   </script>
 </body>
 </html>
